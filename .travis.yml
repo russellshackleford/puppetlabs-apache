@@ -25,9 +25,5 @@ matrix:
     -
       env: PUPPET_GEM_VERSION="~> 4.0" CHECK=parallel_spec RUBYGEMS_VERSION=2.7.8 BUNDLER_VERSION=1.17.3
       rvm: 2.1.9
-branches:
-  only:
-    - master
-    - puppet4
 notifications:
   email: false
