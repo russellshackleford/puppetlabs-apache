@@ -401,7 +401,6 @@
 # @param apache_name
 #   The name of the Apache package to install. If you are using a non-standard Apache package 
 #   you might need to override the default setting.<br />
-#   For CentOS/RHEL Software Collections (SCL), you can also use `apache::version::scl_httpd_version`.
 #
 # @param error_log
 #   The name of the error log file for the main server instance. If the string starts with 
