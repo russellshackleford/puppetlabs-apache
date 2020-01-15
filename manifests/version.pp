@@ -1,11 +1,7 @@
 # @summary
 #   Try to automatically detect the version by OS
 #
-# @api private
-class apache::version(
-  Optional[String] $scl_httpd_version = undef,
-  Optional[String] $scl_php_version   = undef,
-) {
+class apache::version {
   # This will be 5 or 6 on RedHat, 6 or wheezy on Debian, 12 or quantal on Ubuntu, etc.
   $osr_array = split($::operatingsystemrelease,'[\/\.]')
   $distrelease = $osr_array[0]
@@ -15,10 +11,7 @@ class apache::version(
 
   case $::osfamily {
     'RedHat': {
-      if $scl_httpd_version {
-        $default = $scl_httpd_version
-      }
-      elsif ($::operatingsystem == 'Amazon') {
+      if ($::operatingsystem == 'Amazon') {
         $default = '2.2'
       } elsif ($::operatingsystem == 'Fedora' and versioncmp($distrelease, '18') >= 0) or ($::operatingsystem != 'Fedora' and versioncmp($distrelease, '7') >= 0) {
         $default = '2.4'
