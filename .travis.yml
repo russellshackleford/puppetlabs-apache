@@ -23,82 +23,11 @@ matrix:
   fast_finish: true
   include:
     -
-      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
-      stage: static
-    -
-      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
-      rvm: 2.4.5
-      stage: spec
-    -
-      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
-      rvm: 2.5.3
-      stage: spec
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_deb]'", "bundle exec bolt command run 'apt-get install wget -y' --inventoryfile inventory.yaml --nodes='*'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=deb_puppet5
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_deb]'", "bundle exec bolt command run 'apt-get install wget -y' --inventoryfile inventory.yaml --nodes='*'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=deb_puppet6
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_ub]'", "bundle exec bolt command run 'apt-get install wget -y' --inventoryfile inventory.yaml --nodes='*'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=ub_puppet5
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_ub]'", "bundle exec bolt command run 'apt-get install wget -y' --inventoryfile inventory.yaml --nodes='*'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=ub_puppet6
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_el7]'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=el7_puppet5
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[travis_el7]'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: trusty
-      env: PLATFORMS=el7_puppet6
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
+      env: PUPPET_GEM_VERSION="~> 4.0" CHECK=parallel_spec RUBYGEMS_VERSION=2.7.8 BUNDLER_VERSION=1.17.3
+      rvm: 2.1.9
 branches:
   only:
     - master
-    - /^v\d/
-    - release
+    - puppet4
 notifications:
   email: false
-  slack:
-    secure: MrXQwGIUO7WNmLbe7iiWgURiZPUgyvDLkKe3d9S58ohE6gdN6pqlsjP8YgodK8JmIBV1zp5Wj/0cXUmY3xvCtnDmII0DCEk2Y1Cs/W1drKZtS/0BsUpJkj0rDP2fSlKsY5ifESdEta/y8+NkjRnqadbl7SQPYeek4IjAfxjjuig=
